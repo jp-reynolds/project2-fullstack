@@ -28,7 +28,7 @@ app.use(session({
 	resave: true,
 	secret: 'SuperSecretCookie',
 	cookie: { maxAge: 30 * 60 * 1000 },
-	//store: new MongoStore({ url: 'mongodb://JP:mom@ds157599.mlab.com:57599/project2' })
+	store: new MongoStore({ url: 'mongodb://JP:mom@ds157599.mlab.com:57599/project2' })
 }));
 
 
