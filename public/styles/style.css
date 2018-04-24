@@ -1,0 +1,20 @@
+body {
+	padding-bottom: 70px;
+}
+
+.jumbotron {
+  background-image: url('/images/background1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: black;
+}
+
+.jumbotron .container {
+  height: 250px;
+}
+
+.inline-header {
+  display: inline-block;
+  vertical-align: baseline;
+  margin-right: 12px;
+}

@@ -34,7 +34,7 @@ if (process.env.NODE_ENV == "production") {
 
 
 //show sign up page
-app.get('/signup', function (req, res) {
+app.get('/', function (req, res) {
 	res.render('signup');
 });
 

@@ -2,6 +2,8 @@ const express      = require('express')
 const bcrypt       = require('bcrypt');
 const mongoose     = require('mongoose'),
       Schema       = mongoose.Schema;
+var   Place         = require('./places');
+
 
 const UserSchema = new Schema ({
     email: {
@@ -11,7 +13,8 @@ const UserSchema = new Schema ({
     passwordDigest: {
       type: String,
       default: ""
-    }
+    },
+    place: [Place.schema]
 });
 
 // create a new user with secure (hashed) password
