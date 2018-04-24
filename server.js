@@ -9,16 +9,9 @@ const bcrypt       = require('bcrypt');
 const app          = express();
 var   User         = require('./models/users');
 
-if (process.env.NODE_ENV == "production") {
-	console.log("connecting to... " + process.env.NODE_ENV);
-	console.log("also connecting to mlab  " + process.env.MLAB_URL);
-  mongoose.connect(process.env.MLAB_URL)
-} else {
-  mongoose.connect("mongodb://localhost/project2");
-}
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.set('port', process.env.PORT || 3000);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -31,7 +24,13 @@ app.use(session({
 	//store: new MongoStore({ url: 'mongodb://JP:mom@ds157599.mlab.com:57599/project2' })
 }));
 
-
+if (process.env.NODE_ENV == "production") {
+	console.log("connecting to... " + process.env.NODE_ENV);
+	console.log("also connecting to mlab  " + process.env.MLAB_URL);
+  mongoose.connect(process.env.MLAB_URL)
+} else {
+  mongoose.connect("mongodb://localhost/project2");
+}
 
 
 //show sign up page
@@ -79,5 +78,6 @@ app.get('/logout', function (req, res) {
 
 
 
-app.listen(3000, () => console.log('The Federal Government is listening on port 3000'));
-
+app.listen(app.get('port'), () => {
+    console.log(`✅ PORT: ${app.get('port')} 🌟`)
+  })
