@@ -4,6 +4,7 @@ const morgan       = require('morgan');
 const mongoose     = require('mongoose')
 const path         = require('path');
 const session      = require('express-session');
+const MongoStore   = require('connect-mongo')(session);
 const bcrypt       = require('bcrypt');
 const app          = express();
 var   User         = require('./models/users');
@@ -24,11 +25,12 @@ app.use(session({
 	saveUninitialized: true,
 	resave: true,
 	secret: 'SuperSecretCookie',
-	cookie: { maxAge: 30 * 60 * 1000 }
+	cookie: { maxAge: 30 * 60 * 1000 },
+	store: new MongoStore({ url: 'mongodb://localhost/project2' })
 }));
 
 //show sign up page
-app.get('/', function (req, res) {
+app.get('/signup', function (req, res) {
 	res.render('signup');
 });
 
