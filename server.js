@@ -10,6 +10,8 @@ const app          = express();
 var   User         = require('./models/users');
 
 if (process.env.NODE_ENV == "production") {
+	console.log("connecting to... " + process.env.NODE_ENV);
+	console.log("also connecting to mlab  " + process.env.MLAB_URL);
   mongoose.connect(process.env.MLAB_URL)
 } else {
   mongoose.connect("mongodb://localhost/project2");
@@ -26,8 +28,11 @@ app.use(session({
 	resave: true,
 	secret: 'SuperSecretCookie',
 	cookie: { maxAge: 30 * 60 * 1000 },
-	store: new MongoStore({ url: 'mongodb://JP:mom@ds157599.mlab.com:57599/project2' })
+	//store: new MongoStore({ url: 'mongodb://JP:mom@ds157599.mlab.com:57599/project2' })
 }));
+
+
+
 
 //show sign up page
 app.get('/signup', function (req, res) {
