@@ -7,7 +7,8 @@ const session      = require('express-session');
 //const MongoStore   = require('connect-mongo')(session);
 const bcrypt       = require('bcrypt');
 const app          = express();
-var   User         = require('./models/users');
+const db           = require('./models');
+const User         = require('./models/users');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -24,14 +25,14 @@ app.use(session({
 	//store: new MongoStore({ url: 'mongodb://JP:mom@ds157599.mlab.com:57599/project2' })
 }));
 
-if (process.env.NODE_ENV == "production") {
-	console.log("connecting to... " + process.env.NODE_ENV);
-	console.log("also connecting to mlab  " + process.env.MLAB_URL);
-  mongoose.connect(process.env.MLAB_URL)
-} else {
-  mongoose.connect("mongodb://localhost/project2");
-}
-
+// if (process.env.NODE_ENV == "production") {
+// 	console.log("connecting to... " + process.env.NODE_ENV);
+// 	console.log("also connecting to mlab  " + process.env.MLAB_URL);
+//   mongoose.connect(process.env.MLAB_URL)
+// } else {
+//   mongoose.connect("mongodb://localhost/project2");
+// }
+//------------------------------------------------------------------------------
 
 //show sign up page
 app.get('/', function (req, res) {
@@ -44,6 +45,24 @@ app.post('/users', function (req, res) {
     	res.json(newUser);
     	console.log(newUser);
   	});
+});
+
+//show profile page in user session
+app.get('/profile', function (req, res) {
+	User.findOne({_id: req.session.userId}, function (err, currentUser) {
+		res.render('profile.ejs', {user: currentUser})
+	});
+});
+
+app.get('/profile/user', function (req,res) {
+  User.findOne({_id: req.session.userId}, function (err, user) {
+    if(err) {
+      console.log("user error " + err);
+      res.sendStatus(500);
+    }
+    console.log(user);
+    res.json(user);
+  });
 });
 
 //login page
@@ -60,13 +79,6 @@ app.post('/sessions', function (req, res) {
 	});
 });
 
-
-//show profile page in user session
-app.get('/profile', function (req, res) {
-	User.findOne({_id: req.session.userId}, function (err, currentUser) {
-		res.render('profile.ejs', {user: currentUser})
-	});
-});
 
 
 //logout of session

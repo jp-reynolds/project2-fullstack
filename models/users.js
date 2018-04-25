@@ -14,8 +14,15 @@ const UserSchema = new Schema ({
       type: String,
       default: ""
     },
-    place: [Place.schema]
+    place: {
+      placeDoc: [Place.schema],
+      default: ""
+    }
 });
+    // place: [
+    //     placeDoc : Place.schema,
+    //     visited : Boolean
+    // ]
 
 // create a new user with secure (hashed) password
 UserSchema.statics.createSecure = function (email, password, callback) {
@@ -32,12 +39,10 @@ UserSchema.statics.createSecure = function (email, password, callback) {
   });
 };
 
-
 // compare password user enters with hashed password (`passwordDigest`)
 UserSchema.methods.checkPassword = function (password) {
   return bcrypt.compareSync(password, this.passwordDigest);
 };
-
 
 // authenticate user (when user logs in)
 UserSchema.statics.authenticate = function (email, password, callback) {
