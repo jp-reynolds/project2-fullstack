@@ -45,6 +45,8 @@ $(document).ready( function() {
 	$('#futurePlaceForm').on('submit', function(e) {
 		e.preventDefault();
 
+		let city = $('#inputCity').val();
+
 		var formData = {
 			city: $('#inputCity').val(),
 			country: $('#inputCountry').val()
@@ -57,9 +59,11 @@ $(document).ready( function() {
 			error: newFuturePlaceError
 		});
 	});
-		
+//-----------------------------------------------------------
 
-	function getPlacesHtml(placeDoc) {
+//-----------------------------------------------------------
+
+	function getPlaceHtml(placeDoc) {
 		return `
 		    <div class="row album">
 
@@ -67,9 +71,10 @@ $(document).ready( function() {
 		        <div class="panel panel-default">
 		          <div class="panel-body">
 
-		            <div class='row'>
-		              <div class="col-md-3 col-xs-12 thumbnail album-art">
-		                <img src="http://placehold.it/400x400" alt="">
+		            <div class='row map1 map2 map3 map4'>
+
+		              <div id='map'class="col-md-3 col-xs-12 thumbnail">
+		               
 		              </div>
 
 		              <div class="col-md-9 col-xs-12">
@@ -85,12 +90,8 @@ $(document).ready( function() {
 		                  </li>
 		                </ul>
 		              </div>
-
+					  
 		            </div>
-
-		            <div class='panel-footer'>
-		            </div>
-
 		          </div>
 		        </div>
 		      </div>
@@ -100,7 +101,7 @@ $(document).ready( function() {
 
 
 	function getUserPlacesHtml(places) {
-		return places.map(getPlacesHtml).join("");
+		return places.map(getPlaceHtml).join("");
 		console.log("places is " + places)
 	}
 
@@ -133,5 +134,23 @@ $(document).ready( function() {
 		console.log('newFuturePlaceError');
 	}
 
+    function initMap() {
 
+        var location = new google.maps.LatLng(50.0875726, 14.4189987);
+
+        var mapCanvas = document.getElementById('map');
+        var mapOptions = {
+            center: location,
+            zoom: 5,
+            panControl: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+
+    }
+
+    google.maps.event.addDomListener(window, 'load', initMap);
 });
+
+
+

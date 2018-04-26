@@ -18,3 +18,15 @@ body {
   vertical-align: baseline;
   margin-right: 12px;
 }
+
+#map {
+	position: absolute;
+    height: 150px;
+    width: 150px;
+    z-index: 99;
+/*	height: 100%;
+*/}
+
+li.list-group-item {
+	margin-left: 150px;
+}
