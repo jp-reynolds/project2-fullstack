@@ -19,14 +19,41 @@ body {
   margin-right: 12px;
 }
 
+/*.mapRow {
+  width: 800px;
+}
+*/
 #map {
 	position: absolute;
-    height: 150px;
-    width: 150px;
+    height: 400px;
+    width: 400px;
     z-index: 99;
+    float: left;
+    margin-left: 50px;
 /*	height: 100%;
 */}
 
-li.list-group-item {
-	margin-left: 150px;
+#mapStats {
+  height: 400px;
+  width: 400px;
+  margin-left: 500px;
+  float: left;
+  border: black 1px solid;
+}
+
+.masterRow {
+  width: 1200px;
+}
+
+.row {
+  width: 400px;
+}
+
+.column {
+  float: left; 
+  width: 350px;
+}
+
+.thumbnail {
+  text-align: center;
 }

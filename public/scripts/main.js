@@ -60,43 +60,37 @@ $(document).ready( function() {
 		});
 	});
 //-----------------------------------------------------------
-
+	$placesFutureList.on('click', '.mapButton', function (e) {
+		e.preventDefault();
+		$.ajax({
+		method: "GET",
+		url: "/tripMap",
+		data: $('.mapButton').attr('data-id'),
+		success: tripMapSuccess,
+		error: tripMapError
+		});
+		console.log("data from button " + $('.mapButton').attr('data-id'));
+	});
 //-----------------------------------------------------------
 
 	function getPlaceHtml(placeDoc) {
+		console.log(placeDoc._id + " this is the _id");
+		console.log(placeDoc + " this is just placeDoc");
 		return `
-		    <div class="row album">
-
-		      <div class="col-md-10 col-md-offset-1">
-		        <div class="panel panel-default">
-		          <div class="panel-body">
-
-		            <div class='row map1 map2 map3 map4'>
-
-		              <div id='map'class="col-md-3 col-xs-12 thumbnail">
-		               
-		              </div>
-
-		              <div class="col-md-9 col-xs-12">
-		                <ul class="list-group">
-		                  <li class="list-group-item">
-		                    <h4 class='inline-header'>City Name:</h4>
-		                    <span class='city-name'>${placeDoc.city}</span>
-		                  </li>
-
-		                  <li class="list-group-item">
-		                    <h4 class='inline-header'>Country Name:</h4>
-		                    <span class='country-name'>${placeDoc.country}</span>
-		                  </li>
-		                </ul>
-		              </div>
-					  
-		            </div>
-		          </div>
-		        </div>
-		      </div>
-		    </div>`;
-		 console.log(user);
+		<div class="masterRow"
+			<div class="row">
+  				<div class="col-sm-6 col-md-4 column">
+    				<div class="thumbnail">
+      					<img src="http://via.placeholder.com/300x250" alt="...">
+      					<div class="caption">
+        					<h3>${placeDoc.city}</h3>
+        					<p>...</p>
+        					<p><a class="btn btn-primary mapButton" type="submit" role="button" data-id=${placeDoc._id}>See Map</a></p>
+      					</div>
+    				</div>
+  				</div>
+			</div>
+		</div>`;
 	}
 
 
@@ -133,6 +127,15 @@ $(document).ready( function() {
 	function newFuturePlaceError() {
 		console.log('newFuturePlaceError');
 	}
+
+	function tripMapSuccess() {
+		window.location.href = '/tripMap';
+	}
+
+	function tripMapError() {
+		console.log("get map page error!!");
+	}
+
 
     function initMap() {
 

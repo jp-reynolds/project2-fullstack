@@ -26,13 +26,6 @@ app.use(session({
 	//store: new MongoStore({ url: 'mongodb://JP:mom@ds157599.mlab.com:57599/project2' })
 }));
 
-// if (process.env.NODE_ENV == "production") {
-// 	console.log("connecting to... " + process.env.NODE_ENV);
-// 	console.log("also connecting to mlab  " + process.env.MLAB_URL);
-//   mongoose.connect(process.env.MLAB_URL)
-// } else {
-//   mongoose.connect("mongodb://localhost/project2");
-// }
 //------------------------------------------------------------------------------
 
 //SHOW SIGN-UP PAGE
@@ -57,7 +50,7 @@ app.get('/login', function (req, res) {
 //login user to session
 app.post('/sessions', function (req, res) {
 	User.authenticate(req.body.email, req.body.password, function (err, existingUser) {
-		if (err) console.log("error is " + err)
+		if (err) console.log("error is " + err);
 		req.session.userId = existingUser.id
 		res.json(existingUser);
 	});
@@ -93,7 +86,6 @@ app.get('/editProfile', function (req,res) {
 
 //post new Future Place to user's places
 app.put('/profile', function (req,res) {
-console.log(req.params);
 let newPlace = {city: req.body.city, country: req.body.country};
 
 	User.findOneAndUpdate(
@@ -108,6 +100,10 @@ let newPlace = {city: req.body.city, country: req.body.country};
 			}
 		}
 	)
+});
+
+app.get('/tripMap', function (req, res) {
+	res.render("tripMap");
 });
 
 
