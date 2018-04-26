@@ -1,5 +1,5 @@
 var db = require("./models");
-// var Place = require("./models/places");
+var Place = require("./models/places");
 // var User = require("./models/users");
 
 var samplePlaces = [{

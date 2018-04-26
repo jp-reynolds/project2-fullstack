@@ -42,6 +42,23 @@ $(document).ready( function() {
   		error: userPlacesError
 	});
 
+	$('#futurePlaceForm').on('submit', function(e) {
+		e.preventDefault();
+
+		var formData = {
+			city: $('#inputCity').val(),
+			country: $('#inputCountry').val()
+		}
+		$.ajax({
+			method: "PUT",
+			url: '/profile',
+			data: formData,
+			success: newFuturePlaceSuccess,
+			error: newFuturePlaceError
+		});
+	});
+		
+
 	function getPlacesHtml(placeDoc) {
 		return `
 		    <div class="row album">
@@ -104,6 +121,17 @@ $(document).ready( function() {
 		$('#placesFuture').text('Failed to load future places, is the server working?')
 	}
 
+
+	function newFuturePlaceSuccess(json) {
+		$('#futurePlaceForm').val('');
+		futureArray = json.place.placeDoc;
+		console.log(futureArray);
+		render();
+	}
+
+	function newFuturePlaceError() {
+		console.log('newFuturePlaceError');
+	}
 
 
 });

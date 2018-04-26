@@ -9,6 +9,7 @@ const bcrypt       = require('bcrypt');
 const app          = express();
 const db           = require('./models');
 const User         = require('./models/users');
+const Place        = require('./models/places');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -34,7 +35,7 @@ app.use(session({
 // }
 //------------------------------------------------------------------------------
 
-//show sign up page
+//SHOW SIGN-UP PAGE
 app.get('/', function (req, res) {
 	res.render('signup');
 });
@@ -47,25 +48,8 @@ app.post('/users', function (req, res) {
   	});
 });
 
-//show profile page in user session
-app.get('/profile', function (req, res) {
-	User.findOne({_id: req.session.userId}, function (err, currentUser) {
-		res.render('profile.ejs', {user: currentUser})
-	});
-});
 
-app.get('/profile/user', function (req,res) {
-  User.findOne({_id: req.session.userId}, function (err, user) {
-    if(err) {
-      console.log("user error " + err);
-      res.sendStatus(500);
-    }
-    console.log(user);
-    res.json(user);
-  });
-});
-
-//login page
+//SHOW LOGIN PAGE
 app.get('/login', function (req, res) {
 	res.render('login');
 });
@@ -79,6 +63,52 @@ app.post('/sessions', function (req, res) {
 	});
 });
 
+
+//SHOW PROFILE PAGE for user in session
+app.get('/profile', function (req, res) {
+	User.findOne({_id: req.session.userId}, function (err, currentUser) {
+		res.render('profile.ejs', {user: currentUser})
+	});
+});
+
+//gets user data to send to view
+app.get('/profile/user', function (req,res) {
+  User.findOne({_id: req.session.userId}, function (err, user) {
+    if(err) {
+      console.log("user error " + err);
+      res.sendStatus(500);
+    }
+    console.log(user);
+    res.json(user);
+  });
+});
+
+
+//SHOW EDIT PROFILE PAGE
+app.get('/editProfile', function (req,res) {
+	User.findOne({_id: req.session.userId}, function (err, currentUser) {
+		res.render('editProfile', {user: currentUser})
+	});
+});
+
+//post new Future Place to user's places
+app.put('/profile', function (req,res) {
+console.log(req.params);
+let newPlace = {city: req.body.city, country: req.body.country};
+
+	User.findOneAndUpdate(
+		{_id: req.session.userId},
+		{ $push: {'place.placeDoc': newPlace}},
+		{new:true},
+		function (err, doc) {
+			if (err) {
+				console.log("can't add new place to user");
+			} else {
+				res.json(doc);
+			}
+		}
+	)
+});
 
 
 //logout of session
