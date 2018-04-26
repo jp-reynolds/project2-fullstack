@@ -59,6 +59,8 @@ $(document).ready( function() {
 			error: newFuturePlaceError
 		});
 	});
+
+
 //-----------------------------------------------------------
 	$placesFutureList.on('click', '.mapButton', function (e) {
 		e.preventDefault();
@@ -73,37 +75,41 @@ $(document).ready( function() {
 	});
 //-----------------------------------------------------------
 
+
+
 	function getPlaceHtml(placeDoc) {
 		console.log(placeDoc._id + " this is the _id");
 		console.log(placeDoc + " this is just placeDoc");
-		return `
-		<div class="masterRow"
-			<div class="row">
-  				<div class="col-sm-6 col-md-4 column">
-    				<div class="thumbnail">
-      					<img src="http://via.placeholder.com/300x250" alt="...">
-      					<div class="caption">
-        					<h3>${placeDoc.city}</h3>
-        					<p>...</p>
-        					<p><a class="btn btn-primary mapButton" type="submit" role="button" data-id=${placeDoc._id}>See Map</a></p>
-      					</div>
-    				</div>
-  				</div>
-			</div>
-		</div>`;
+			return `<div class="masterRow"
+						<div class="row">
+	  						<div class="col-sm-6 col-md-4 column">
+	    						<div class="thumbnail">
+	      							<img src="http://via.placeholder.com/300x250" alt="...">
+	      							<div class="caption">
+	        							<h3>${placeDoc.city}</h3>
+	        							<p>...</p>
+	        							<p><a class="btn btn-primary mapButton" type="submit" role="button" data-id=${placeDoc._id}>See Map</a></p>
+										<p><a class="btn btn-primary" type="submit" role="button" data-id=${placeDoc._id}>Delete</a></p>
+	      							</div>
+	    						</div>
+	  						</div>
+						</div>
+					</div>`; 
 	}
 
 
 	function getUserPlacesHtml(places) {
+		console.log("places is " + places);
 		return places.map(getPlaceHtml).join("");
-		console.log("places is " + places)
 	}
 
 	function render () {
 		$placesFutureList.empty();
 		var placesHtml = getUserPlacesHtml(futureArray);
 		$placesFutureList.append(placesHtml);
-	};
+	}
+
+
 
 	function userPlacesSuccess(json) {
 		futureArray = json.place.placeDoc;
@@ -117,6 +123,7 @@ $(document).ready( function() {
 	}
 
 
+
 	function newFuturePlaceSuccess(json) {
 		$('#futurePlaceForm').val('');
 		futureArray = json.place.placeDoc;
@@ -128,6 +135,8 @@ $(document).ready( function() {
 		console.log('newFuturePlaceError');
 	}
 
+
+
 	function tripMapSuccess() {
 		window.location.href = '/tripMap';
 	}
@@ -135,6 +144,7 @@ $(document).ready( function() {
 	function tripMapError() {
 		console.log("get map page error!!");
 	}
+
 
 
     function initMap() {
