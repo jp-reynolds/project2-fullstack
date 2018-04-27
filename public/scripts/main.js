@@ -23,7 +23,7 @@ $(document).ready( function() {
 			method: "POST",
 			data: formData,
 			success: function (response) {
-				window.location = '/profile'
+				window.location = '/editProfile'
 			}
 		})
 	});
@@ -60,6 +60,16 @@ $(document).ready( function() {
 		});
 	});
 
+	$placesFutureList.on('click', '.removeBtn', function () {
+		$.ajax({
+			method: 'PUT',
+			url: '/userRemovePlace',
+			data:{removedPlace: $(this).attr('data-id')},
+			success: removeFutureSuccess,
+			error: removeFutureError
+		});
+	});
+
 
 //-----------------------------------------------------------
 	$placesFutureList.on('click', '.mapButton', function (e) {
@@ -88,8 +98,9 @@ $(document).ready( function() {
 	      							<div class="caption">
 	        							<h3>${placeDoc.city}</h3>
 	        							<p>...</p>
-	        							<p><a class="btn btn-primary mapButton" type="submit" role="button" data-id=${placeDoc._id}>See Map</a></p>
-										<p><a class="btn btn-primary" type="submit" role="button" data-id=${placeDoc._id}>Delete</a></p>
+	        							<p><a class="btn btn-primary mapButton" type="submit" role="button" data-id=${placeDoc._id}>See Map</a>
+	        							<a class="btn btn-primary removeBtn" type="submit" role="button" data-id=${placeDoc._id}>Remove</a></p>
+										<p>Have Fun!</p>
 	      							</div>
 	    						</div>
 	  						</div>
@@ -133,6 +144,18 @@ $(document).ready( function() {
 
 	function newFuturePlaceError() {
 		console.log('newFuturePlaceError');
+	}
+
+
+
+	function removeFutureSuccess(json) {
+		futureArray = json.place.placeDoc;
+		console.log(futureArray);
+		render();
+	}
+
+	function removeFutureError () {
+		console.log("couldn't delete ITEM!!!");
 	}
 
 

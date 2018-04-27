@@ -51,7 +51,7 @@ app.get('/login', function (req, res) {
 app.post('/sessions', function (req, res) {
 	User.authenticate(req.body.email, req.body.password, function (err, existingUser) {
 		if (err) console.log("error is " + err);
-		req.session.userId = existingUser.id
+		req.session.userId = existingUser.id;
 		res.json(existingUser);
 	});
 });
@@ -60,7 +60,7 @@ app.post('/sessions', function (req, res) {
 //SHOW PROFILE PAGE for user in session
 app.get('/profile', function (req, res) {
 	User.findOne({_id: req.session.userId}, function (err, currentUser) {
-		res.render('profile.ejs', {user: currentUser})
+		res.render('profile.ejs', {user: currentUser});
 	});
 });
 
@@ -80,7 +80,7 @@ app.get('/profile/user', function (req,res) {
 //SHOW EDIT PROFILE PAGE
 app.get('/editProfile', function (req,res) {
 	User.findOne({_id: req.session.userId}, function (err, currentUser) {
-		res.render('editProfile', {user: currentUser})
+		res.render('editProfile', {user: currentUser});
 	});
 });
 
@@ -99,7 +99,23 @@ let newPlace = {city: req.body.city, country: req.body.country};
 				res.json(doc);
 			}
 		}
-	)
+	);
+});
+
+app.put('/userRemovePlace', function (req, res) {
+
+	User.findOneAndUpdate(
+		{_id: req.session.userId},
+		{ $pull: {'place.placeDoc': {_id: req.body.removedPlace}}},
+		{ new: true},
+		function (err, updatedPlacesArray) {
+			if (err) {
+				console.log("can't remove place from user!");
+			} else {
+				res.json(updatedPlacesArray);
+			}
+		}
+	);
 });
 
 app.get('/tripMap', function (req, res) {
@@ -117,5 +133,5 @@ app.get('/logout', function (req, res) {
 
 
 app.listen(app.get('port'), () => {
-    console.log(`✅ PORT: ${app.get('port')} 🌟`)
-  })
+    console.log(`✅ PORT: ${app.get('port')} 🌟`);
+  });
