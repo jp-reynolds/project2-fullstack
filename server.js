@@ -118,15 +118,36 @@ app.put('/userRemovePlace', function (req, res) {
 	);
 });
 
-app.get('/tripMap', function (req, res) {
-	res.render("tripMap");
+
+// app.get('/tripMap/:id', function (req, res) {
+// 	let city = req.params.id;
+
+// 	User.findOne({'place.placeDoc': city}, function (err, city) {
+// 		res.render('tripMap', {'place.placeDoc': city});
+// 		console.log({'place.placeDoc': city});
+// 	});
+// });
+
+app.get('/tripMap/:id', function (req, res) {
+	let city = req.params.id;
+
+	User.findOne({'place.placeDoc': city}, function (err, city) {
+		res.render('tripMap', {city: city});
+	})
+		
+
 });
+
+// app.post('/tripMap', function (req, res) {
+// 	let city = (req.params.id);
+// 	res.send(city);
+// });
 
 
 //logout of session
 app.get('/logout', function (req, res) {
 	req.session.userId = null;
-	res.redirect('/login');
+	res.render('/login');
 });
 
 

@@ -10,8 +10,6 @@ $(document).ready( function() {
 			console.log(response);
 		})
 	});
-
-
 	$('#login-form').on('submit', function(e) {
 		e.preventDefault();
 		var formData = {
@@ -27,7 +25,7 @@ $(document).ready( function() {
 			}
 		})
 	});
-
+//--------------------------------------------------------
 
 	var $placesFutureList = $('#placesFuture');
 	var futureArray = [];
@@ -74,22 +72,37 @@ $(document).ready( function() {
 //-----------------------------------------------------------
 	$placesFutureList.on('click', '.mapButton', function (e) {
 		e.preventDefault();
+		let city = $(this).attr('data-id');
 		$.ajax({
 		method: "GET",
-		url: "/tripMap",
-		data: $('.mapButton').attr('data-id'),
-		success: tripMapSuccess,
+		url: "/tripMap/" + city,
+		success: function () {
+			window.location = '/tripMap/' + city;
+		},
 		error: tripMapError
 		});
-		console.log("data from button " + $('.mapButton').attr('data-id'));
 	});
+
+
+	// $placesFutureList.on('click', '.mapButton', function (e) {
+	// 	e.preventDefault();
+	// 	$.ajax({
+	// 	method: "POST",
+	// 	url: "/tripMap",
+	// 	data: {placeOnMap: $(this).attr('data-id')},
+	// 	success: placeMapSuccess,
+	// 	error: placeMapError
+	// 	});
+	// 	console.log("data from button " + $(this).attr('data-id'));
+	// });
+
+
 //-----------------------------------------------------------
 
 
 
 	function getPlaceHtml(placeDoc) {
-		console.log(placeDoc._id + " this is the _id");
-		console.log(placeDoc + " this is just placeDoc");
+
 			return `<div class="masterRow"
 						<div class="row">
 	  						<div class="col-sm-6 col-md-4 column">
@@ -97,8 +110,7 @@ $(document).ready( function() {
 	      							<img src="http://via.placeholder.com/300x250" alt="...">
 	      							<div class="caption">
 	        							<h3>${placeDoc.city}</h3>
-	        							<p>...</p>
-	        							<p><a class="btn btn-primary mapButton" type="submit" role="button" data-id=${placeDoc._id}>See Map</a>
+	        							<p><a class="btn btn-primary mapButton" type="submit" role="button" data-id=${placeDoc.city}>See Map</a>
 	        							<a class="btn btn-primary removeBtn" type="submit" role="button" data-id=${placeDoc._id}>Remove</a></p>
 										<p>Have Fun!</p>
 	      							</div>
@@ -110,7 +122,6 @@ $(document).ready( function() {
 
 
 	function getUserPlacesHtml(places) {
-		console.log("places is " + places);
 		return places.map(getPlaceHtml).join("");
 	}
 
@@ -159,33 +170,72 @@ $(document).ready( function() {
 	}
 
 
+//----------------------------------------------------
+	var $mapCityName = $('#mapCityName');
 
-	function tripMapSuccess() {
-		window.location.href = '/tripMap';
-	}
+
 
 	function tripMapError() {
 		console.log("get map page error!!");
 	}
 
+	// function placeMapSuccess(json) {
+	// 	// window.location.href = '/tripMap';
+	// 	console.log(json);
+	// }
+
+	// function placeMapError() {
+	// 	console.log("get cityName error!!");
+	// }
 
 
-    function initMap() {
 
-        var location = new google.maps.LatLng(50.0875726, 14.4189987);
+	if (top.location.pathname === '/tripMap') {
+		
 
-        var mapCanvas = document.getElementById('map');
-        var mapOptions = {
-            center: location,
-            zoom: 5,
-            panControl: false,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-        var map = new google.maps.Map(mapCanvas, mapOptions);
+	
 
-    }
+	function geocode(city){
+		let cityName = Prague;
 
-    google.maps.event.addDomListener(window, 'load', initMap);
+		$.ajax({
+			method: "GET",
+			url: 'https://maps.googleapis.com/maps/api/geocode/json',
+			data: {
+				address: cityName,
+				key: "AIzaSyDKzL9i_mBzOIhycihjJQ15j7Z4UakLa6o"
+		},
+	 		 success: geocodeSuccess,
+	 		 error: geocodeError
+		});
+
+		function geocodeSuccess (response) {
+	  		console.log(response);
+		}
+		function geocodeError (error) {
+	  		console.log(error);
+		}
+	}
+
+    // function initMap() {
+
+    //     var location = new google.maps.LatLng(50.0875726, 14.4189987);
+
+    //     var mapCanvas = document.getElementById('map');
+    //     var mapOptions = {
+    //         center: location,
+    //         zoom: 5,
+    //         panControl: false,
+    //         mapTypeId: google.maps.MapTypeId.ROADMAP
+    //     }
+    //     var map = new google.maps.Map(mapCanvas, mapOptions);
+
+    // }
+
+
+
+    // google.maps.event.addDomListener(window, 'load', initMap);
+   }
 });
 
 
