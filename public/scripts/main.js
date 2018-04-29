@@ -68,35 +68,25 @@ $(document).ready( function() {
 		});
 	});
 
-
+//THIS WILL BRING YOU TO THE MAP PAGE OF THE CITY CLICKED ON
 //-----------------------------------------------------------
 	$placesFutureList.on('click', '.mapButton', function (e) {
 		e.preventDefault();
 		let city = $(this).attr('data-id');
+
 		$.ajax({
 		method: "GET",
 		url: "/tripMap/" + city,
 		success: function () {
-			window.location = '/tripMap/' + city;
+			window.location.href = '/tripMap/' + city;
 		},
 		error: tripMapError
 		});
 	});
 
-
-	// $placesFutureList.on('click', '.mapButton', function (e) {
-	// 	e.preventDefault();
-	// 	$.ajax({
-	// 	method: "POST",
-	// 	url: "/tripMap",
-	// 	data: {placeOnMap: $(this).attr('data-id')},
-	// 	success: placeMapSuccess,
-	// 	error: placeMapError
-	// 	});
-	// 	console.log("data from button " + $(this).attr('data-id'));
-	// });
-
-
+	function tripMapError() {
+		console.log("get map page error!!");
+	}
 //-----------------------------------------------------------
 
 
@@ -120,7 +110,6 @@ $(document).ready( function() {
 					</div>`; 
 	}
 
-
 	function getUserPlacesHtml(places) {
 		return places.map(getPlaceHtml).join("");
 	}
@@ -130,8 +119,6 @@ $(document).ready( function() {
 		var placesHtml = getUserPlacesHtml(futureArray);
 		$placesFutureList.append(placesHtml);
 	}
-
-
 
 	function userPlacesSuccess(json) {
 		futureArray = json.place.placeDoc;
@@ -171,32 +158,12 @@ $(document).ready( function() {
 
 
 //----------------------------------------------------
-	var $mapCityName = $('#mapCityName');
 
 
-
-	function tripMapError() {
-		console.log("get map page error!!");
-	}
-
-	// function placeMapSuccess(json) {
-	// 	// window.location.href = '/tripMap';
-	// 	console.log(json);
-	// }
-
-	// function placeMapError() {
-	// 	console.log("get cityName error!!");
-	// }
-
-
-
-	if (top.location.pathname === '/tripMap') {
-		
-
-	
+	// if (top.location.pathname === '/tripMap/:id') {
 
 	function geocode(city){
-		let cityName = Prague;
+		let cityName = city;
 
 		$.ajax({
 			method: "GET",
@@ -217,25 +184,25 @@ $(document).ready( function() {
 		}
 	}
 
-    // function initMap() {
+    function initMap() {
 
-    //     var location = new google.maps.LatLng(50.0875726, 14.4189987);
+        var location = new google.maps.LatLng(50.0875726, 14.4189987);
 
-    //     var mapCanvas = document.getElementById('map');
-    //     var mapOptions = {
-    //         center: location,
-    //         zoom: 5,
-    //         panControl: false,
-    //         mapTypeId: google.maps.MapTypeId.ROADMAP
-    //     }
-    //     var map = new google.maps.Map(mapCanvas, mapOptions);
+        var mapCanvas = document.getElementById('map');
+        var mapOptions = {
+            center: location,
+            zoom: 5,
+            panControl: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(mapCanvas, mapOptions);
 
-    // }
+    }
 
 
 
     // google.maps.event.addDomListener(window, 'load', initMap);
-   }
+   
 });
 
 

@@ -15,17 +15,23 @@
 </head>
 <body class="tripMapPage">
 
+  <h2>Welcome to ...</br>
+        <%= city %>.</h2>
+
     <div class="container">
       <a id="edit" href="/editProfile" class="btn btn-default">Back to Edit Profile</a>  
     </div>
-<div id='mapCityName'></div>
+
+<div id='generateMap'>
+  
+</div>
+
 <div class="row">
 <div id="map"></div>
 <div id="mapStats"></div>
 </div>
 
-<h2>This is the city you want </br>
-        <%= city.city %>.</h2>
+
 
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbpOwwcUrc8fTdFZSPy4SDwXq6Vc2eK0s"></script>
