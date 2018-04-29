@@ -25,6 +25,10 @@ $(document).ready( function() {
 			}
 		})
 	});
+
+	$('#signup-form').on('submit', function (e) {
+		window.location = '/login';
+	});
 //--------------------------------------------------------
 
 	var $placesFutureList = $('#placesFuture');
@@ -162,46 +166,9 @@ $(document).ready( function() {
 
 	// if (top.location.pathname === '/tripMap/:id') {
 
-	function geocode(city){
-		let cityName = city;
-
-		$.ajax({
-			method: "GET",
-			url: 'https://maps.googleapis.com/maps/api/geocode/json',
-			data: {
-				address: cityName,
-				key: "AIzaSyDKzL9i_mBzOIhycihjJQ15j7Z4UakLa6o"
-		},
-	 		 success: geocodeSuccess,
-	 		 error: geocodeError
-		});
-
-		function geocodeSuccess (response) {
-	  		console.log(response);
-		}
-		function geocodeError (error) {
-	  		console.log(error);
-		}
-	}
-
-    function initMap() {
-
-        var location = new google.maps.LatLng(50.0875726, 14.4189987);
-
-        var mapCanvas = document.getElementById('map');
-        var mapOptions = {
-            center: location,
-            zoom: 5,
-            panControl: false,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-        var map = new google.maps.Map(mapCanvas, mapOptions);
-
-    }
 
 
 
-    // google.maps.event.addDomListener(window, 'load', initMap);
    
 });
 
