@@ -32,8 +32,62 @@
 </div>
 
 
+<script type="text/javascript">
+  var postion;
+
+  geocode(); 
+
+  function initMap(position) {
+
+        //map options
+        var options = {
+            center: position,
+            zoom: 8,
+        }
+        //new map
+        var map = new google.maps.Map(document.getElementById('map'), options);
+
+        //new marker
+        var marker = new google.maps.Marker({
+          position: position,
+          map: map
+        });
+    }
 
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbpOwwcUrc8fTdFZSPy4SDwXq6Vc2eK0s"></script>
+  function geocode(){
+
+    let cityName = '<%= city %>';
+
+    $.ajax({
+      method: "GET",
+      url: 'https://maps.googleapis.com/maps/api/geocode/json',
+      data: {
+        address: cityName,
+        key: "AIzaSyDKzL9i_mBzOIhycihjJQ15j7Z4UakLa6o"
+    },
+       success: geocodeSuccess,
+       error: geocodeError
+    });
+
+    function geocodeSuccess (response) {
+        console.log(response.results[0].formatted_address);
+        console.log(response.results[0].geometry.location);
+
+        var position = response.results[0].geometry.location;
+        initMap(position);
+    }
+    function geocodeError (error) {
+        console.log(error);
+    }
+  }
+
+      
+    // google.maps.event.addDomListener(window, 'load', initMap);
+</script>
+
+
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbpOwwcUrc8fTdFZSPy4SDwXq6Vc2eK0s&callback=initMap"></script>
 </body>
 </html>
