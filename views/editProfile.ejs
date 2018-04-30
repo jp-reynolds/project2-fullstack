@@ -13,15 +13,15 @@
 
   <title>Travel Log</title>
 </head>
-<body class="editProfilePage">
+<body class="editProfilePage" style="background-color: lightgrey;">
 
   <div class="jumbotron">
     <div class="container">
-      <h1>Profile</h1>
-      <h2>Welcome! You're logged in as </br>
+      <h1>Travel Log</h1>
+      <h2>Profile Picture:</br>
         <%= user.email %>.</h2>
       <a id="logout" href="/logout" class="btn btn-default">Log Out</a>
-      <a id="return" href="/profile" class="btn btn-default">Return to Profile</a>  
+      <!-- <a id="return" href="/profile" class="btn btn-default">Return to Profile</a>  --> 
     </div>
   </div>
   
@@ -49,7 +49,6 @@
     <div class="form-group mx-sm-3 mb-2">
       <label for="inputPassword2" class="sr-only">Password</label>
       <input disabled type="text" class="form-control" id="inputPassword2" placeholder="Type city name here...">
-      <input disabled type="text" class="form-control" id="inputPassword2" placeholder="Type country name here...">
     </div>
     <button type="submit" class="btn btn-primary mb-2">Add</button>
   </form>
