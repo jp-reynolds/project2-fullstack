@@ -150,7 +150,7 @@ $(document).ready( function() {
 
 
 	function newFuturePlaceSuccess(json) {
-		$('#futurePlaceForm').val('');
+		$('#inputCity').val('');
 		futureArray = json.place.placeDoc;
 		console.log(futureArray);
 		render();
