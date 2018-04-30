@@ -58,11 +58,11 @@ app.post('/sessions', function (req, res) {
 
 
 //SHOW PROFILE PAGE for user in session
-app.get('/profile', function (req, res) {
-	User.findOne({_id: req.session.userId}, function (err, currentUser) {
-		res.render('profile.ejs', {user: currentUser});
-	});
-});
+// app.get('/profile', function (req, res) {
+// 	User.findOne({_id: req.session.userId}, function (err, currentUser) {
+// 		res.render('profile.ejs', {user: currentUser});
+// 	});
+// });
 
 //gets user data to send to view
 app.get('/profile/user', function (req,res) {
@@ -81,6 +81,16 @@ app.get('/profile/user', function (req,res) {
 app.get('/editProfile', function (req,res) {
 	User.findOne({_id: req.session.userId}, function (err, currentUser) {
 		res.render('editProfile', {user: currentUser});
+	});
+});
+
+app.delete('/user/delete/:id', function (req, res) {
+	User.findOneAndRemove({_id: req.params.id}, function (err, userDelete) {
+		if (err) {
+			console.log("error deleting user");
+		} else {
+			res.redirect('/');
+		}
 	});
 });
 
@@ -119,8 +129,6 @@ app.put('/userRemovePlace', function (req, res) {
 });
 
 
-
-
 app.get('/tripMap/:id', function (req, res) {
 
 	res.render('tripMap', {city: req.params.id});
@@ -131,7 +139,7 @@ app.get('/tripMap/:id', function (req, res) {
 //logout of session
 app.get('/logout', function (req, res) {
 	req.session.userId = null;
-	res.render('/login');
+	res.redirect('/login');
 });
 
 

@@ -18,9 +18,12 @@
   <div class="jumbotron">
     <div class="container">
       <h1>Travel Log</h1>
-      <h2>Profile Picture:</br>
-        <%= user.email %>.</h2>
-      <a id="logout" href="/logout" class="btn btn-default">Log Out</a>
+      <div id="profilePicture">
+        <h3 style="margin-left: 25px;">Profile Picture:</br>
+        <%= user.email %>.</h3>
+      </div>
+      
+      <a id="logout" href="/logout" class="btn btn-warning">Log Out</a>
       <!-- <a id="return" href="/profile" class="btn btn-default">Return to Profile</a>  --> 
     </div>
   </div>
@@ -56,6 +59,13 @@
       <div id='placesPast'>
         
       </div>
+        
+        <!-- href="/delete" -->
+      <a id="deleteBtn" class="btn btn-danger" data-id="<%= user._id %>">Delete Account</a>
+
+  <footer>
+        <% include ./partials/footer %>
+  </footer>
 
 </body>
 </html>

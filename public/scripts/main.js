@@ -29,6 +29,18 @@ $(document).ready( function() {
 	$('#signup-form').on('submit', function (e) {
 		window.location = '/login';
 	});
+
+	$('#deleteBtn').on('click', function () {
+		console.log("delete button clicked");
+		$.ajax({
+			method: 'DELETE',
+			url: '/user/delete/' + $(this).attr('data-id'),
+			success: function (response) {
+				window.location.href = '/'
+			},
+		});
+		console.log($(this).attr('data-id'));
+	});
 //--------------------------------------------------------
 
 	var $placesFutureList = $('#placesFuture');

@@ -16,6 +16,27 @@ background-position:center;
   color: black;
 }
 
+#profilePicture {
+  border: black 1px solid;
+  height: 150px;
+  width: 150px;
+  background-color: white;
+  margin-left: 15px;
+}
+
+#logout {
+  margin-left: 40px;
+  margin-top: 5px;
+}
+
+#deleteBtn {
+  float:right;
+}
+
+footer {
+  clear: both;
+}
+
 .jumbotron .container {
   height: 250px;
 }

@@ -15,7 +15,7 @@
 </head>
 <body class="tripMapPage">
 
-  <h2>Welcome to ...</br>
+  <h2 style="text-align: center;">Welcome to ...</br>
         <%= city %>.</h2>
 
     <div class="container">
@@ -86,6 +86,9 @@
     // google.maps.event.addDomListener(window, 'load', initMap);
 </script>
 
+    <footer>
+        <% include ./partials/footer %>
+    </footer>
 
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbpOwwcUrc8fTdFZSPy4SDwXq6Vc2eK0s&callback=initMap"></script>
