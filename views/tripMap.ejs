@@ -13,13 +13,13 @@
 
   <title>Travel Log</title>
 </head>
-<body class="tripMapPage">
+<body background="/images/tripmap2.jpg" style=" background-repeat: no-repeat; background-size: cover;" class="tripMapPage">
 
   <h2 style="text-align: center;">Welcome to ...</br>
         <%= city %>.</h2>
 
     <div class="container">
-      <a id="edit" href="/editProfile" class="btn btn-default">Back to Edit Profile</a>  
+      <a style="margin-left: 500px; margin-bottom: 7px;" id="edit" href="/editProfile" class="btn btn-primary">Back to Edit Profile</a>  
     </div>
 
 <div id='generateMap'>
@@ -28,7 +28,13 @@
 
 <div class="row">
 <div id="map"></div>
-<div id="mapStats"></div>
+<div id="mapStats">
+  <p id="stats">City Data coming soon...</p>
+  <p id="stats">(form to add markers to nearby place in trip)</p>
+  <p id="stats">track distance in between markers in miles</p>
+  <p id="stats">City, Country, Continent</p>
+  <p id="stats">Weather API?</p>
+</div>
 </div>
 
 
