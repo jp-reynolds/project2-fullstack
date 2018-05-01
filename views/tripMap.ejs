@@ -62,7 +62,6 @@
         });
     }
 
-
   function geocode(){
 
     let cityName = '<%= city %>';
@@ -83,6 +82,7 @@
         console.log(response.results[0].geometry.location);
 
         var position = response.results[0].geometry.location;
+        
         initMap(position);
     }
     function geocodeError (error) {
