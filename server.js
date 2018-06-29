@@ -134,14 +134,11 @@ app.get('/tripMap/:id', function (req, res) {
 	res.render('tripMap', {city: req.params.id});
 });
 
-
-
 //logout of session
 app.get('/logout', function (req, res) {
 	req.session.userId = null;
 	res.redirect('/login');
 });
-
 
 
 
