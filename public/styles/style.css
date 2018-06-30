@@ -22,6 +22,11 @@ background-position:center;
   margin-top: 5px;
 }
 
+#futurePlaceForm {
+  text-align: center;
+  padding-bottom: 1.5em;
+}
+
 #deleteBtn {
   float:right;
 }
@@ -54,9 +59,9 @@ footer {
     width: 700px;
     z-index: 99;
     float: left;
-    margin-left: 50px;
     border: black 1px solid;
-    margin-bottom: 50px;
+    margin-left: 75px;
+    margin-bottom: 1em;
 }
 
 #mapStats {
@@ -83,6 +88,11 @@ footer {
 .column {
   float: left; 
   width: 350px;
+}
+
+#userData {
+  margin-top: 450px;
+  margin-left: 150px;
 }
 
 .thumbnail {
