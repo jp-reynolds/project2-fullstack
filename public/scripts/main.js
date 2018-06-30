@@ -63,7 +63,7 @@ $(document).ready( function() {
 
 		var formData = {
 			city: $('#inputCity').val(),
-			country: $('#inputCountry').val()
+			// country: $('#inputCountry').val()
 		}
 		$.ajax({
 			method: "PUT",

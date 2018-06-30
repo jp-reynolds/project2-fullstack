@@ -17,18 +17,14 @@
 </head>
 <body class="editProfilePage" style="background-color: rgba(240, 240, 240);">
 
-  <div class="jumbotron">
-    <div class="container">
-      <h1 style="font-family: 'Courgette', cursive;">Travel Log</h1>
+
+      <h1 id="profileTitle" style="font-family: 'Courgette', cursive;">Travel Log</h1>
       <div id="profilePicture">
-        <h3 style="margin-left: 25px; font-family: 'Courgette', cursive;">Profile Picture:</br>
+        <h3 style="margin-left: 25px; font-family: 'Courgette', cursive;">Hello, </br>
         <%= user.email %>.</h3>
+
       </div>
       
-      <a id="logout" href="/logout" class="btn btn-warning">Log Out</a>
-      <!-- <a id="return" href="/profile" class="btn btn-default">Return to Profile</a>  --> 
-    </div>
-  </div>
   
   <form class="form-inline" id="futurePlaceForm">
     <div class="form-group mb-2">
@@ -40,33 +36,20 @@
     </div>
     <button type="submit" class="btn btn-primary mb-2">Add</button>
   </form>
-      <div id='placesFuture'>
+<!--       <div id='placesFuture'>
         
-      </div>
+      </div> -->
 
   <hr>
 
-  <!-- <form class="form-inline" id="pastPlaceForm">
-    <div class="form-group mb-2">
-      <h4 style="font-family: 'Courgette', cursive;">Past Travel Place</h4>
-    </div>
-    <div class="form-group mx-sm-3 mb-2">
-      <label for="inputPassword2" class="sr-only">Password</label>
-      <input disabled type="text" class="form-control" id="inputPassword2" placeholder="Coming Soon...v2.0">
-    </div>
-    <button type="submit" class="btn btn-primary mb-2">Add</button>
-  </form>
-  <hr>
-      <div id='placesPast'>
+  <div>
+        <% include ./partials/tripMap %>
+  </div>
         
-      </div>
         
        
-      <a id="deleteBtn" class="btn btn-danger" data-id="<%= user._id %>">Delete Account</a>
- -->
-  <footer>
-        <% include ./partials/footer %>
-  </footer>
+<!--       <a id="deleteBtn" class="btn btn-danger" data-id="<%= user._id %>">Delete Account</a>
+ --> 
 
 </body>
 </html>

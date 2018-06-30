@@ -9,20 +9,12 @@ background-repeat:no-repeat;
 background-position:center;
 }
 
-.jumbotron {
-  background-image: url('/images/denver.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: black;
+#profileTitle {
+  text-align: center;
 }
 
 #profilePicture {
-  border: black 1px solid;
-  height: 150px;
-  width: 150px;
-  background-color: white;
-  margin-left: 15px;
+  text-align: center;
 }
 
 #logout {
@@ -59,13 +51,13 @@ footer {
 #map {
 	position: absolute;
     height: 400px;
-    width: 400px;
+    width: 700px;
     z-index: 99;
     float: left;
     margin-left: 50px;
     border: black 1px solid;
-/*	height: 100%;
-*/}
+    margin-bottom: 50px;
+}
 
 #mapStats {
   height: 400px;
