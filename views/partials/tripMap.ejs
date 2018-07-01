@@ -27,21 +27,20 @@
   geocode(); 
 
   function initMap(position) {
+      //map options
+      var options = {
+          center: position,
+          zoom: 8,
+      }
+      //new map
+      var map = new google.maps.Map(document.getElementById('map'), options);
 
-        //map options
-        var options = {
-            center: position,
-            zoom: 8,
-        }
-        //new map
-        var map = new google.maps.Map(document.getElementById('map'), options);
-
-        //new marker
-        var marker = new google.maps.Marker({
-          position: position,
-          map: map
-        });
-    }
+      //new marker
+      var marker = new google.maps.Marker({
+        position: position,
+        map: map
+      });
+  }
 
   function geocode(){
 
