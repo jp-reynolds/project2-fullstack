@@ -90,14 +90,33 @@
     }
   }
 
+
+
+//WORKING IN A WEATHER MAP API
+  // $.ajax({
+  //     method: "GET",
+  //     url: "http://api.openweathermap.org/data/2.5/weather?q=" + '<%= city %>' + "&appid=63623588dafef4755b03ceb8eaa78ed9&units=imperial",
+  //     data: results.data.main.temp,
+  //     success: weatherSuccess,
+  //     error: weatherError
+  //   });
+
+  // function weatherSuccess () {
+
+  // }
+
+  // function weatherError () {
+
+  // }
+
+      // let tempCity = results.data.main.temp
+      // let iconCity = results.data.weather[0].icon
+
       
     // google.maps.event.addDomListener(window, 'load', initMap);
 </script>
 
-    <footer>
-        <% include ./partials/footer %>
-    </footer>
-
+ 
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbpOwwcUrc8fTdFZSPy4SDwXq6Vc2eK0s&callback=initMap"></script>
 </body>

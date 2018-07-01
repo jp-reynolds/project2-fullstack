@@ -113,7 +113,6 @@ $(document).ready( function() {
 						<div class="row">
 	  						<div class="col-sm-6 col-md-4 column">
 	    						<div class="thumbnail">
-	      							<img src="http://via.placeholder.com/300x250" alt="...">
 	      							<div class="caption">
 	        							<h3>${placeDoc.city}</h3>
 	        							<p><a class="btn btn-primary mapButton" type="submit" role="button" data-id=${placeDoc.city}>See Map</a>

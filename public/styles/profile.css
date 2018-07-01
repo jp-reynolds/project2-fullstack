@@ -1,0 +1,19 @@
+#title {
+	font-family: 'Courgette', cursive;
+	text-align: center;
+}
+
+#profileName {
+	text-align: center;
+	font-family: 'Courgette', cursive;
+}
+
+#logout {
+	margin-left: 45%;
+	margin-right: 50%;
+}
+
+.form-inline {
+	text-align: center;
+	padding-top: 1.5em;
+}
