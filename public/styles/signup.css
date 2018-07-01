@@ -1,0 +1,22 @@
+.body {
+	background-color: skyblue;
+	background-repeat: no-repeat; 
+	background-size: 100%;
+}
+
+#title {
+	font-family: 'Courgette', cursive;
+}
+
+#titleText {
+	font-family: 'Courgette', cursive;
+}
+
+#loginText {
+	color: black; 
+	font-size: 15px;
+}
+
+.container {
+	padding-top: 50px;
+}

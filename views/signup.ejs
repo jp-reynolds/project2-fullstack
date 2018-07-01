@@ -9,6 +9,8 @@
 
   <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
 
+  <link rel="stylesheet" href="/styles/signup.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
@@ -16,11 +18,12 @@
 
   <title>Travel Log</title>
 </head>
-<body background="/images/myanmar.jpg" style="background-position:center;">
+<body class="body" background="/images/signup.jpg">
   <div class="container text-center">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
-        <h1 style="font-family: 'Courgette', cursive;">Sign Up</h1>
+        <h1 id="title">Traveller</h1>
+        <h3 id="titleText">Sign Up</h3>
         <hr>
         <form id="signup-form">
           <div class="form-group">
@@ -34,7 +37,7 @@
           <div class="form-group">
             <input type="submit" value="Sign Up" class="submit btn btn-primary signup">
           </div>
-          <a style="color: black; font-size: 15px;" href="/login">Already a user? Login here...</a>
+          <a id="loginText" href="/login">Already a user? Login here...</a>
         </form>
       </div>
     </div>
